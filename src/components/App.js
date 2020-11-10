@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { fetchPosts } from "../actions/posts";
+import { PostsList } from "./";
 
 class App extends React.Component {
   componentDidMount() {
@@ -9,38 +10,18 @@ class App extends React.Component {
   }
 
   render() {
-    // console.log("PROPS", this.props);
-    const {posts}=this.props;
-    return(
-     <div>
-       <div className="posts-list">
-{posts.map(post=>{
-<div className="post-wrapper">
-  <div className="post-header">
-    <div className="post-avatar">
-      <img
-        src="https://www.flaticon.com/svg/static/icons/svg/3135/3135715.svg"
-        alt="pic"
-      ></img>
+    const { posts } = this.props;
+    return (
       <div>
-        <span className="post-author">{post.user.name}</span>
-        <span className="post-time">a minute ago</span>
+        <PostsList posts={posts} />
       </div>
-    </div>
-    <div className="post-content">{post.content}</div>
-  </div>
-</div>;
-})}
-       </div>
-     </div>
     );
   }
 }
-    
+
 function mapStateToProps(state) {
   return {
     posts: state.posts,
-  
   };
 }
 export default connect(mapStateToProps)(App);
